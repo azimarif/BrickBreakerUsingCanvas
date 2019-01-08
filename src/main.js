@@ -7,9 +7,13 @@ const brickMargin = 7;
 const brickTopMargin = 3;
 const numberOfBricksPerRow = 8;
 const numberOfBricksRow = 5;
+
+let ballXPosition = gameCanvas.width / 2;
+let ballYPosition = gameCanvas.height - 30;
+let ballRadius = 5;
 let bricks = [];
 
-const createBricks = function() {
+const createBricks = function () {
   for (let row = 0; row < numberOfBricksRow; row++) {
     for (let column = 0; column < numberOfBricksPerRow; column++) {
       bricks.push({
@@ -21,7 +25,7 @@ const createBricks = function() {
   }
 };
 
-const drawBricks = function() {
+const drawBricks = function () {
   bricks.forEach(brick => {
     if (brick.status) {
       gameContext.beginPath();
@@ -33,5 +37,14 @@ const drawBricks = function() {
   });
 };
 
+const drawBall = function () {
+  gameContext.beginPath();
+  gameContext.arc(ballXPosition, ballYPosition, ballRadius, 0, Math.PI * 2);
+  gameContext.fillStyle = "green";
+  gameContext.fill();
+  gameContext.closePath();
+}
+
 createBricks();
 drawBricks();
+drawBall();
