@@ -10,12 +10,14 @@ const numberOfBricksRow = 5;
 
 let ballXPosition = gameCanvas.width / 2;
 let ballYPosition = gameCanvas.height - 30;
+let ballDx = 3;
+let ballDy = -3;
 const ballRadius = 5;
 let bricks = [];
 
 const peddleWidth = 60;
-const peddleHeight=15;
-let peddleXPosition=(gameCanvas.width - peddleWidth) /2;
+const peddleHeight = 15;
+let peddleXPosition = (gameCanvas.width - peddleWidth) / 2;
 
 const createBricks = function () {
   for (let row = 0; row < numberOfBricksRow; row++) {
@@ -57,7 +59,14 @@ const drawPeddle = function () {
   gameContext.closePath();
 }
 
-createBricks();
-drawBricks();
-drawBall();
-drawPeddle();
+const draw = function () {
+  gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+  createBricks();
+  drawBricks();
+  drawBall();
+  drawPeddle();
+  ballXPosition = ballXPosition + ballDx;
+  ballYPosition = ballYPosition + ballDy;
+}
+
+setInterval(draw, 100);
