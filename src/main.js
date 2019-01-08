@@ -59,14 +59,35 @@ const drawPeddle = function () {
   gameContext.closePath();
 }
 
+const isHitSideWall = function () {
+  return ballXPosition > gameCanvas.width || ballXPosition < ballRadius;
+}
+
+const isHitTopWall = function () {
+  return ballYPosition < ballRadius;
+}
+
+const isHitBottom = function () {
+  return ballYPosition > gameCanvas.height - ballRadius;
+}
+
 const draw = function () {
   gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
   createBricks();
   drawBricks();
   drawBall();
   drawPeddle();
+
   ballXPosition = ballXPosition + ballDx;
   ballYPosition = ballYPosition + ballDy;
+
+  if (isHitSideWall()) {
+    ballDx = -ballDx;
+  }
+
+  if (isHitTopWall() || isHitBottom()) {
+    ballDy = -ballDy;
+  }
 }
 
 setInterval(draw, 100);
