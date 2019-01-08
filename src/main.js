@@ -10,8 +10,12 @@ const numberOfBricksRow = 5;
 
 let ballXPosition = gameCanvas.width / 2;
 let ballYPosition = gameCanvas.height - 30;
-let ballRadius = 5;
+const ballRadius = 5;
 let bricks = [];
+
+const peddleWidth = 60;
+const peddleHeight=15;
+let peddleXPosition=(gameCanvas.width - peddleWidth) /2;
 
 const createBricks = function () {
   for (let row = 0; row < numberOfBricksRow; row++) {
@@ -45,6 +49,15 @@ const drawBall = function () {
   gameContext.closePath();
 }
 
+const drawPeddle = function () {
+  gameContext.beginPath();
+  gameContext.rect(peddleXPosition, gameCanvas.height - peddleHeight, peddleWidth, peddleHeight);
+  gameContext.fillStyle = "brown";
+  gameContext.fill();
+  gameContext.closePath();
+}
+
 createBricks();
 drawBricks();
 drawBall();
+drawPeddle();
